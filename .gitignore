@@ -1,0 +1,4 @@
+# Ignoramos la carpeta node_modules para que no se almacene en el repositorio
+# Siempre que se quierean generar node_modules las dependencias se encuentran
+# en el package.json y se pueden instalar con npm install
+/BloggingSystem/node_modules
