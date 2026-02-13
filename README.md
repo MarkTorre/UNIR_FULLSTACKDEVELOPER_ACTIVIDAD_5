@@ -20,3 +20,8 @@ Comando para ejecutar el servidor y verificar que el componente se ha cargado en
 ```bash
 ng serve -o
 ```
+### 3. Maquetar las áreas dentro del componente con html y css
+
+Primero de todo he creado un diseño con "Penopot" para tener un diseño principal y poder maquetar de una forma más eficiente.
+
+![alt text](BlogTemplateDesign-1.jpg)
