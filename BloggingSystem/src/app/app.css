@@ -1,0 +1,4 @@
+.app-blog {
+  display: flex;
+  flex-direction: row;
+}
