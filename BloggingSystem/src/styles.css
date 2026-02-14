@@ -3,17 +3,13 @@
   box-sizing:border-box
 }
 
-:root{
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --background-color: #f4f4f4;
-  --text-color: #333;
-  --border-radius: 5px;
+html, body {
+  height: 100%;
+  margin:0;
 }
 
 body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #b5b3b3;
-  margin:0;
-  padding:0;
+  background-color: #afafaf;
+  height: 100%;
 }

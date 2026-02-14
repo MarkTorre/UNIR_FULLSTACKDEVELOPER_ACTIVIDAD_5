@@ -1,0 +1,20 @@
+:host {
+   /*Variables locales para el propio componente*/
+  --color-pink:rgb(255, 200, 208);
+  --color-turquoise: #cbfffa;
+  /*Instrucciones app-blog */
+  display: flex;
+  flex-direction: row;
+  height:100%;
+}
+
+
+#news-generator {
+  background: linear-gradient(to bottom, var(--color-pink), var(--color-turquoise));
+  flex: 1;
+}
+
+#news-content {
+  background-color: white;
+  flex:2;
+}
