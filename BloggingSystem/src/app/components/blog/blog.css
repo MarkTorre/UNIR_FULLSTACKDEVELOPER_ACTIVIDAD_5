@@ -3,13 +3,17 @@
   --color-pink:rgb(255, 200, 208);
   --shadow-pink:rgba(243, 125, 166, 0.5);
   --color-turquoise: #cbfffa;
+  --color-grey: #f2f2f2;
+  --color-grey-dark: #dcdcdc;
+  --color-entry-text: #b6b6b6;
+  --color-placeholder-text: #929292;
   /*Instrucciones app-blog */
   display: flex;
   flex-direction: row;
   height:100%;
 }
 
-/* News Section Generation*/
+/* 1. Section News Generation*/
 #news-generator {
   display: flex;
   flex-direction: column;
@@ -21,15 +25,93 @@
 
 /* Box News Entry*/
 #news-gen-box {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0px 0px 40px 5px var(--shadow-pink); /* h-offset | v-offset | blur | spread | color */
   width: 80%;
   height: 80%;
-  margin: auto;
+  padding: 40px;
 }
 
-/**/
+#news-gen-title-separator {
+  position: relative; /*posición relativa para que el separador pueda salir un poquito por fuera del padding del padre*/
+  left: -5%;  /*desplazo la mitad del tanto por ciento incrementado en width(10%) para que quede centrado.*/
+  width: 110%; /*Incremento el tamaño de width en un 10%*/
+  height: 2px;
+  background-color: var(--color-grey);
+}
+
+.news-box-entry {
+  display:flex;
+  flex-direction: column;
+  background-color: var(--color-grey);
+  width:100%;
+  border-radius:10px;
+  margin-top: 10px;
+
+}
+
+#news-entry-separator {
+  height: 2px;
+  background-color: var(--color-grey-dark);
+}
+
+#news-entry-content {
+  height: 100%;
+
+}
+
+#news-entry-container{
+  height: 100%;
+
+}
+
+
+
+.entry-style {
+  background: transparent;
+  border: none;
+  resize: none;
+  border-style: none;
+  outline:none;
+  height: 50px;
+  padding-left: var(--padding-news-generator);
+
+  /*Text Style*/
+  font-size: 20px;
+  font-weight: 500px;
+  color:var(--color-placeholder-text);
+}
+
+.entry-style::placeholder {
+  color:var(--color-placeholder-text);
+}
+
+#bttn-news {
+  background-color:rgb(251, 134, 173);
+  border: none;
+  color: rgb(255, 249, 249);
+  font-weight: 500px;
+  width: 200px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin-top: 20%;
+  border-radius: 5px;
+  cursor: pointer;
+   /* Transición suave para el cambio de color y el efecto de clic */
+  transition: background-color 0.3s ease;
+}
+
+#bttn-news:active{
+  background-color:rgb(255, 174, 201);
+}
+
+/*2. Section News Content*/
 #news-content {
   background-color: white;
   flex:2;
