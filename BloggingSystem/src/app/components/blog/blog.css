@@ -1,6 +1,7 @@
 :host {
    /*Variables locales para el propio componente*/
   --color-pink:rgb(255, 200, 208);
+  --shadow-pink:rgba(243, 125, 166, 0.5);
   --color-turquoise: #cbfffa;
   /*Instrucciones app-blog */
   display: flex;
@@ -8,12 +9,27 @@
   height:100%;
 }
 
-
+/* News Section Generation*/
 #news-generator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(to bottom, var(--color-pink), var(--color-turquoise));
   flex: 1;
 }
 
+/* Box News Entry*/
+#news-gen-box {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 40px 5px var(--shadow-pink); /* h-offset | v-offset | blur | spread | color */
+  width: 80%;
+  height: 80%;
+  margin: auto;
+}
+
+/**/
 #news-content {
   background-color: white;
   flex:2;
