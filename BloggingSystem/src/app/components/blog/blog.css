@@ -20,10 +20,11 @@
 #news-generator {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: linear-gradient(to bottom, var(--color-pink), var(--color-turquoise));
   flex: 1;
+  padding-top:50px;
 }
 
 /* Box News Entry*/
@@ -34,7 +35,7 @@
   border-radius: 20px;
   box-shadow: 0px 0px 40px 5px var(--shadow-pink); /* h-offset | v-offset | blur | spread | color */
   width: 80%;
-  height: 80%;
+  height: 80vh;
   padding: 40px;
 }
 

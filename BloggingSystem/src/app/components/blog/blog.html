@@ -4,43 +4,31 @@
     <div id="news-gen-title-separator"></div>
     <div id="news-entry-container" class="news-box-entry">
       <label for="news-entry-title">Title</label>
-      <input id="news-entry-title" class="entry-style" type="text" aria-label="news title" name="news-title" placeholder="">
+      <input id="news-entry-title" class="entry-style" type="text" name="news-title" placeholder="" [(ngModel)]="title" required>
       <div id="news-entry-separator"></div>
       <label for="news-entry-content">Content</label>
-      <textarea id="news-entry-content" class="entry-style"  name="news-entry-content" placeholder=""></textarea>
+      <textarea id="news-entry-content" class="entry-style"  name="news-entry-content" placeholder="" [(ngModel)]="text"></textarea>
     </div>
     <div class="news-box-entry">
       <label for="news-entry-url">Image Url</label>
-      <input id="news-entry-url" class="entry-style" type="text" name="news-image-url">
+      <input id="news-entry-url" class="entry-style" type="text" name="news-image-url" [(ngModel)]="image">
     </div>
     <div class="news-box-entry">
       <label for="news-entry-date">Date</label>
-      <input id="news-entry-date" class="entry-style"  type="date" aria-label="Publication Date" name="news-date" placeholder="Date">
+      <input id="news-entry-date" class="entry-style"  type="date" name="news-date" placeholder="Date" [(ngModel)]="datetime">
     </div>
-    <button id="bttn-news">Create News</button>
+    <button id="bttn-news" type="submit" (click)="createNews()">Create News</button>
   </div>
 </section>
 
 <section id="news-content">
-  <article class="news-content-article">
-    <img class="news-content-image" src="https://media.es.wired.com/photos/69839fb75b96bbe563fda323/master/w_2240,c_limit/Parkinson%20565784959.jpg" alt="">
-    <time datetime="2026-02-16"> Publicado 16 de febrero, 2026</time>
-    <h3> Cientificos Identifican una red cerebral que podría revolucionar el tratamiento del Parkinson</h3>
-    <p>"Modificar la actividad de la red cerebral SCAN podría relentizar o revertir la progresión de la enfermedad
-      de Parkinson, no solo tratar los sintomas"", afirman los autores de este nuevo estudio."</p>
-    <div class="news-content-separator"></div>
-  </article>
-
-
-   <article class="news-content-article">
-    <img class="news-content-image" src="https://media.es.wired.com/photos/693f310efe6ac91463e5ae5d/16:9/w_2240,c_limit/cerebrocuantico.jpg" alt="">
-    <time datetime="2026-02-16"> Publicado 16 de febrero, 2026</time>
-    <h3> Cientificos Identifican una red cerebral que podría revolucionar el tratamiento del Parkinson</h3>
-    <p>"Modificar la actividad de la red cerebral SCAN podría relentizar o revertir la progresión de la enfermedad
-      de Parkinson, no solo tratar los sintomas"", afirman los autores de este nuevo estudio."</p>
-    <div class="news-content-separator"></div>
-  </article>
-
-
-
+  @for(news of array_news; track news.id){
+    <article class="news-content-article">
+        <img class="news-content-image" [src]="news.image" alt="">
+        <time > Publicado en {{converTimestampToDatetime(news.timestamp)}}</time>
+        <h3> {{news.title}}</h3>
+        <p>{{news.text}}</p>
+        <div class="news-content-separator"></div>
+    </article>
+  }
 </section>
