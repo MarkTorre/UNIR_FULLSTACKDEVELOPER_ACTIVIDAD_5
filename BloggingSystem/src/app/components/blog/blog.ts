@@ -41,7 +41,7 @@ export class Blog implements Inews {
   }
 
   converTimestampToDatetime(timestamp: number){
-    return new Date(timestamp);
+    return new Date(timestamp).toDateString();
   }
 
   createNews() {

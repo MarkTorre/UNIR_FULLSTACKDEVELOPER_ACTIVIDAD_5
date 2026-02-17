@@ -25,7 +25,7 @@
   @for(news of array_news; track news.id){
     <article class="news-content-article">
         <img class="news-content-image" [src]="news.image" alt="">
-        <time > Publicado {{converTimestampToDatetime(news.timestamp)}}</time>
+        <time > Publicado en {{converTimestampToDatetime(news.timestamp)}}</time>
         <h3> {{news.title}}</h3>
         <p>{{news.text}}</p>
         <div class="news-content-separator"></div>
