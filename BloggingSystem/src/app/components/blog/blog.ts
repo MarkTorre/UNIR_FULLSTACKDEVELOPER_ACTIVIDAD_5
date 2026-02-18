@@ -27,7 +27,7 @@ enum ErrorMessages{
 })
 export class Blog implements Inews {
   public readonly ErrorStatus = ErrorStatus; /* Para poder utilizar el enum en el template html. */
-
+  /* Propiedadess de la noticias*/
   id: number = 0;
   title: string = '';
   image: string = '';
@@ -42,14 +42,18 @@ export class Blog implements Inews {
   image_error: ErrorStatus = ErrorStatus.None;
   datetime_error: ErrorStatus = ErrorStatus.None;
 
-  title_error_msg: WritableSignal<string> = signal<string>(ErrorMessages.TextField);
+  title_error_msg: WritableSignal<string> = signal<string>(ErrorMessages.TextField); // para practicar con los signals los he puesto para diferenciar algunos tios de errores que cambian según el control de error definido en las funciones validate para cada entrada.
   text_error_msg: WritableSignal<string> = signal<string>(ErrorMessages.TextField);
   image_error_msg: WritableSignal<string> = signal<string>(ErrorMessages.TextField);
   datetime_error_msg: WritableSignal<string> = signal<string>(ErrorMessages.TextField);
 
   constructor(){
     /*Init Array With two notice*/
-    this.array_news.push({
+
+  }
+  /* Angular Methods */
+  ngOnInit(): void{
+   this.array_news.push({
       id: this.id++,
       title: "Logran eliminar por completo tumores de páncreas en ratones utilizando una triple terapia",
       image: "https://i0.wp.com/www.fernandatapia.com/wp-content/uploads/2026/02/Logran-eliminar-por-completo-tumores-de-pancreas-en-ratones-utilizando-una-triple-terapia.jpg?w=800&ssl=1",
@@ -64,25 +68,42 @@ export class Blog implements Inews {
       timestamp: Date.now()
     });
   }
-
-  convertDateToTimestamp(date: Date) {
+  /* Conversion Methods */
+  convertDateToTimestamp(date: Date):number {
     return date.getTime();
   }
 
-  converTimestampToDateString(timestamp: number){
+  converTimestampToDateString(timestamp: number): string{
     return new Date(timestamp).toDateString();
   }
+  /* Validate Methods */
+  #validateProperties(): boolean{
+    /* Para el primer click poder mostrar las entradas que contienen errores */
+    if(this.title_error === ErrorStatus.None) this.title_error = ErrorStatus.True;
+    if(this.image_error === ErrorStatus.None) this.image_error = ErrorStatus.True;
+    if(this.text_error === ErrorStatus.None) this.text_error = ErrorStatus.True;
+    if(this.datetime_error === ErrorStatus.None) this.datetime_error = ErrorStatus.True;
 
-  validateTitle(value: string){
+    /* Solo validaermos el formulario cuando todos los campos estén correctos */
+    if (this.title_error === ErrorStatus.True ||
+        this.image_error === ErrorStatus.True ||
+        this.text_error === ErrorStatus.True  ||
+        this.datetime_error === ErrorStatus.True) {
+      return false;
+    }
+    return true;
+  }
+
+  validateTitle(value: string): void{
     this.title_error = (value === '') ? ErrorStatus.True : ErrorStatus.False;
   }
 
-  validateText(value: string){
+  validateText(value: string): void{
     this.text_error = (value === '') ? ErrorStatus.True : ErrorStatus.False;
   }
 
-  validateImage(value: string){
-    /* Biref check if its a valid url */
+  validateImage(value: string): void{
+    /* Pequeño control del formato del string del url de la imagen, para asegurarse de que es una petición http/s con una extension de imagen. */
     const valid_http = value.startsWith('http://') || value.startsWith('https://') ? true : false;
     const valid_img = value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png') || value.endsWith('.gif') ? true : false;
 
@@ -99,7 +120,7 @@ export class Blog implements Inews {
     }
   }
 
-  validateDatetime(value: string){
+  validateDatetime(value: string): void{
     if(value === ''){
       this.datetime_error = ErrorStatus.True;
       this.datetime_error_msg.set(ErrorMessages.DateTime);
@@ -108,37 +129,23 @@ export class Blog implements Inews {
     }
   }
 
-  #validateProperties(): boolean{
-    if(this.title_error === ErrorStatus.None) this.title_error = ErrorStatus.True;
-    if(this.image_error === ErrorStatus.None) this.image_error = ErrorStatus.True;
-    if(this.text_error === ErrorStatus.None) this.text_error = ErrorStatus.True;
-    if(this.datetime_error === ErrorStatus.None) this.datetime_error = ErrorStatus.True;
-
-    if (this.title_error === ErrorStatus.True ||
-        this.image_error === ErrorStatus.True ||
-        this.text_error === ErrorStatus.True  ||
-        this.datetime_error === ErrorStatus.True) {
-      return false;
-    }
-    return true;
-  }
-
-  createNews() {
-    /* Validamos las propiedades */
+  /* Creator news method */
+  createNews(): void{
+    /* Validamos las propiedades de las entradas*/
     const validate: boolean = this.#validateProperties()
-    /* Validación de los datos */
     if ( validate === true) {
+      /* Hago la conversión del objeto date a timestamp */
       const date_now = new Date(this.datetime);
       this.timestamp = this.convertDateToTimestamp(date_now);
       /* Creación del formulario si todo ok*/
       const news: Inews = {
-        id: this.id++,
+        id: this.id++, /*incrementamos el id de la noticia para el bucle @for del template de HTML */
         title:this.title,
         image:this.image,
         text:this.text,
         timestamp:this.timestamp,
       }
-      /* Añadimos la nueva noticia */
+      /* Añadimos la nueva noticia al array de noticias */
       this.array_news.push(news);
     }
   }

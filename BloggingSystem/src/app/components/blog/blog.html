@@ -3,14 +3,15 @@
     <h2 id="news-gen-title">  Add News</h2>
     <div id="news-gen-title-separator"></div>
     <div id="news-entry-container" class="news-box-entry">
-      <label for="news-entry-title">Title</label>
-      <input id="news-entry-title" class="entry-style" type="text"  name="news-title" placeholder="" [(ngModel)]="title" #emailModel="ngModel" (ngModelChange)="validateTitle(title)" required>
+      <label for="news-entry-title">Title</label> <!-- Utilizo [(ngModel)] para hacer el TWO-WAY-DATA-BINDING. También he utilizado el EVENT-BINDING (ngModelChange) para que cada entrada sea responsable de validar sus propios cambios. -->
+      <input id="news-entry-title" class="entry-style" type="text"  name="news-title" [(ngModel)]="title" (ngModelChange)="validateTitle(title)" required>
+      <!-- Uso los @if para mostrar los diferentes tipos de errores definidos en la enum ErrorMessage -->
       @if(title_error === ErrorStatus.True){
         <span class="news-entry-error">{{title_error_msg()}}!</span>
       }
       <div id="news-entry-separator"></div>
       <label for="news-entry-content">Content</label>
-      <textarea id="news-entry-content" class="entry-style"  name="news-entry-content" placeholder="" [(ngModel)]="text" (ngModelChange)="validateText(text)" required></textarea>
+      <textarea id="news-entry-content" class="entry-style"  name="news-entry-content" [(ngModel)]="text" (ngModelChange)="validateText(text)" required></textarea>
       @if(text_error === ErrorStatus.True){
         <span class="news-entry-error">{{text_error_msg()}}</span>
       }
@@ -24,7 +25,7 @@
     </div>
     <div class="news-box-entry">
       <label for="news-entry-date">Date</label>
-      <input id="news-entry-date" class="entry-style"  type="date" name="news-date" placeholder="Date" [(ngModel)]="datetime" (ngModelChange)="validateDatetime(datetime)"required>
+      <input id="news-entry-date" class="entry-style"  type="date" name="news-date" [(ngModel)]="datetime" (ngModelChange)="validateDatetime(datetime)"required>
       @if(datetime_error === ErrorStatus.True){
         <span class="news-entry-error">{{datetime_error_msg()}}</span>
       }
@@ -36,9 +37,9 @@
 <section id="news-content">
   @for(news of array_news; track news.id){
     <article class="news-content-article">
-        <img class="news-content-image" [src]="news.image" alt="">
+        <img class="news-content-image" [src]="news.image" [alt]="news.image"> <!-- DATA-BINDING del url de cada noticia-->
         <time > Publicado en {{converTimestampToDateString(news.timestamp)}}</time>
-        <h3> {{news.title}}</h3>
+        <h3> {{news.title}}</h3> <!-- Interpolación de las demás propieades de cada noticia-->
         <p>{{news.text}}</p>
         <div class="news-content-separator"></div>
     </article>
