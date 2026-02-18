@@ -169,6 +169,12 @@
   margin: 0px;
 }
 
+.news-entry-error {
+  color: rgb(255, 97, 97);
+  font-size: 14px;
+  padding: 10px 10px 10px 10px;
+  margin: 0px;
+}
 /*2.6 News Separator*/
 .news-content-separator {
   width: 100%;

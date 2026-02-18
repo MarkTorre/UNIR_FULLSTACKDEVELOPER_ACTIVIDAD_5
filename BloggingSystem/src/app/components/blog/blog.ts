@@ -18,6 +18,11 @@ export class Blog implements Inews {
   array_news: Inews[] = [];
   datetime: string = '';
 
+  title_error: boolean = false;
+  image_error: boolean = false;
+  text_error: boolean = false;
+  datetime_error: boolean = false;
+
   constructor(){
     /*Init Array With two notice*/
     this.array_news.push({
@@ -40,14 +45,30 @@ export class Blog implements Inews {
     return date.getTime();
   }
 
-  converTimestampToDatetime(timestamp: number){
+  converTimestampToDateString(timestamp: number){
     return new Date(timestamp).toDateString();
+  }
+
+  validateTitle(value: any){
+    this.title_error = (value === '') ? true : false;
+  }
+
+  validateText(value: any){
+    this.text_error = (value === '') ? true : false;
+  }
+
+  validateImage(value: any){
+    this.image_error = (value === '') ? true : false;
+  }
+
+  validateDatetime(value: any){
+    this.datetime_error = (value === '') ? true : false;
   }
 
   createNews() {
     let validate: boolean = false;
     /* Validación de los datos */
-    if (this.title && this.image && this.text && this.datetime) {
+    if ( !this.title_error && !this.image_error && !this.text_error && !this.datetime_error) {
       const date_now = new Date(this.datetime);
       this.timestamp = this.convertDateToTimestamp(date_now);
       validate = true;
