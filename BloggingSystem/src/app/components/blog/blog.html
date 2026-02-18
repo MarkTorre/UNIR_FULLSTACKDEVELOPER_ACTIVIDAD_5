@@ -7,7 +7,7 @@
       <input id="news-entry-title" class="entry-style" type="text"  name="news-title" [(ngModel)]="title" (ngModelChange)="validateTitle(title)" required>
       <!-- Uso los @if para mostrar los diferentes tipos de errores definidos en la enum ErrorMessage -->
       @if(title_error === ErrorStatus.True){
-        <span class="news-entry-error">{{title_error_msg()}}!</span>
+        <span class="news-entry-error">{{title_error_msg()}}</span>
       }
       <div id="news-entry-separator"></div>
       <label for="news-entry-content">Content</label>
@@ -38,7 +38,7 @@
   @for(news of array_news; track news.id){
     <article class="news-content-article">
         <img class="news-content-image" [src]="news.image" [alt]="news.image"> <!-- DATA-BINDING del url de cada noticia-->
-        <time > Publicado en {{converTimestampToDateString(news.timestamp)}}</time>
+        <time > Publicación {{converTimestampToDateString(news.timestamp)}}</time>
         <h3> {{news.title}}</h3> <!-- Interpolación de las demás propieades de cada noticia-->
         <p>{{news.text}}</p>
         <div class="news-content-separator"></div>

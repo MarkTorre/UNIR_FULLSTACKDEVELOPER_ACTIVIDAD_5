@@ -74,7 +74,7 @@ export class Blog implements Inews {
   }
 
   converTimestampToDateString(timestamp: number): string{
-    return new Date(timestamp).toDateString();
+    return new Date(timestamp).toLocaleDateString('es-ES');
   }
   /* Validate Methods */
   #validateProperties(): boolean{
